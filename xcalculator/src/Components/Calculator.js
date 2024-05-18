@@ -1,32 +1,57 @@
 import styles from "../Components/Calculator.module.css";
+import {useState} from "react";
+import "../App.css"
 
 export default function Falculator(){
+   const [value, setValue]= useState("")
+   const[ans, setAns] = useState(0)
+    const[btnClicked, setbtnClicked] = useState(false)
+
+    const reset=(()=>{
+   setValue("");
+   setAns(0);
+   setbtnClicked(false);
+   
+    })
+  
+
+    const calculate=(()=>{
+        setAns(eval(value));
+   setbtnClicked(true);
+   console.log(ans);
+   
+   
+    })
  return (
     <div className={styles.app}>
     <h1>React Calculator</h1>
-    <input></input><br/>
-    <button>7</button>
-    <button>8</button>
-    <button>9</button>
-    <button>+</button>
+    <input value={value} type="text" /><br/>
+    {btnClicked===true && value==="" && <p>Error</p>}
+
+    <div className={styles.buttonParent}>
+    <button onClick={()=> setValue(()=> value.concat("7"))}>7</button>
+    <button onClick={()=> setValue(()=> value.concat("8"))}>8</button>
+    <button onClick={()=> setValue(()=> value.concat("9"))}>9</button>
+    <button onClick={()=> setValue(()=> value.concat("+"))}>+</button>
     <br/>
 
-    <button>4</button>
-    <button>5</button>
-    <button>6</button>
-    <button>-</button>
+    <button onClick={()=> setValue(()=> value.concat("4"))}>4</button>
+    <button onClick={()=> setValue(()=> value.concat("5"))}>5</button>
+    <button onClick={()=> setValue(()=> value.concat("6"))}>6</button>
+    <button onClick={()=> setValue(()=> value.concat("-"))}>-</button>
     <br/>
 
-    <button>1</button>
-    <button>2</button>
-    <button>3</button>
-    <button>*</button>
+    <button onClick={()=> setValue(()=> value.concat("1"))}>1</button>
+    <button onClick={()=> setValue(()=> value.concat("2"))}>2</button>
+    <button onClick={()=> setValue(()=> value.concat("3"))}>3</button>
+    <button onClick={()=> setValue(()=> value.concat("*"))}>*</button>
     <br/>
 
-    <button>C</button>
-    <button>0</button>
-    <button>=</button>
-    <button>/</button>
+    <button onClick={reset}>C</button>
+    <button onClick={()=> setValue(()=> value.concat("0"))}>0</button>
+    <button onClick={calculate}>=</button>
+    <button onClick={()=> setValue(()=> value.concat("/"))}>/</button>
+    </div>
     </div>
  )
 }
