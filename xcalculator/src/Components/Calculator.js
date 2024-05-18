@@ -2,7 +2,7 @@ import styles from "../Components/Calculator.module.css";
 import {useState} from "react";
 import "../App.css"
 
-export default function Falculator(){
+export default function Calculator(){
    const [value, setValue]= useState("")
    const[ans, setAns] = useState(0)
     const[btnClicked, setbtnClicked] = useState(false)
@@ -19,6 +19,7 @@ export default function Falculator(){
         setAns(eval(value));
    setbtnClicked(true);
    console.log(ans);
+//    setAns(ans);
    
    
     })
@@ -26,7 +27,9 @@ export default function Falculator(){
     <div className={styles.app}>
     <h1>React Calculator</h1>
     <input value={value} type="text" /><br/>
+
     {btnClicked===true && value==="" && <p>Error</p>}
+    {ans !== 0 && <p>{ans}</p>}
 
     <div className={styles.buttonParent}>
     <button onClick={()=> setValue(()=> value.concat("7"))}>7</button>
